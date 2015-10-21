@@ -1,14 +1,15 @@
+
 class Numeric
   # Ceiling with given precision.
   def roundup(d=0)
-    x = 10**d
+    x = 10**(-d)
     self.quo(x).ceil * x
   end
 
   # Flooring with given precision.
   def rounddown(d=0)
-    x = 10**d
-   self.quo(x).ceil * x
+    x = 10**(-d)
+   self.quo(x).floor * x
   end
   
   
@@ -39,7 +40,6 @@ class Numeric
       [x, y].min_by{|t| (t - self).abs}
     end
   end
-  
   
   # Rounding with given significant digit.
   def sround(digit, base=10)
