@@ -26,49 +26,52 @@ class Numeric
   # Return nearest multiple of given number that is equal to or greater than self.
   # This method round up to the positive infinity direction.
   def mceil(num)
-    #
-    # MEMO: maybe ruby bug: 
-    #   1.2.divmod(1/10r) => [11, 0.0999999999999999]
-    #
-    #div, mod = divmod(num)
-    div = self.div(num); mod = self - div*num
-    x = num * div; y = x + (mod.zero? ? 0 : num)
-    [x, y].max
+    if (x = num * div(num)) == self
+      self
+    else
+      [x, x+num].max
+    end
   end
   
   # Return nearest multiple of given number that is equal to or less than self.
   # This method round down to the negative infinity direction.
   def mfloor(num)
-    div = self.div(num); mod = self - div*num
-    x = num * div; y = x + (mod.zero? ? 0 : num)
-    [x, y].min
+    if (x = num * div(num)) == self
+      self
+    else
+      [x, x+num].min
+    end
   end
   
   # Return nearest multiple of given number that the absolute is equal to or greater than self.
   # This method round up to far from 0 direction.
   def mroundup(num)
-    div = self.div(num); mod = self - div*num
-    x = num * div; y = x + (mod.zero? ? 0 : num)
-    [x, y].max_by(&:abs)
+    if (x = num * div(num)) == self
+      self
+    else
+      [x, x+num].max_by(&:abs)
+    end
   end
   
   # Return nearest multiple of given number that the absolute is equal to or less than self.
   # This method round down to near to 0 direction.
   def mrounddown(num)
-    div = self.div(num); mod = self - div*num
-    x = num * div; y = x + (mod.zero? ? 0 : num)
-    [x, y].min_by(&:abs)
+    if (x = num * div(num)) == self
+      self
+    else
+      [x, x+num].min_by(&:abs)
+    end
   end
   
   # Retuen nearest multiple of given number.
   # When self is median of multiple of given number, return the multiple that have greater absolute.
   def mround(num)
-    div = self.div(num); mod = self - div*num
-    x = num * div; y = x + (mod.zero? ? 0 : num)
-    if mod.quo(num).abs * 2 == 1
-      [x, y].max_by(&:abs)
+    if (x = num * div(num)) == self
+      self
+    elsif x + x +num == self + self # if self is median
+      [x, x+num].max_by(&:abs)
     else
-      [x, y].min_by{|t| (t - self).abs}
+      [x, x+num].min_by{|t| (t - self).abs}
     end
   end
   
