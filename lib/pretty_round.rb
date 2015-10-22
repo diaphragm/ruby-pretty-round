@@ -28,7 +28,7 @@ class Numeric
   def mceil(num)
     #
     # MEMO: maybe ruby bug: 
-    #   123.456.divmod(1/10r) => [123456, 4.996003610813204e-16]
+    #   1.2.divmod(1/10r) => [11, 0.0999999999999999]
     #
     #div, mod = divmod(num)
     div = self.div(num); mod = self - div*num
