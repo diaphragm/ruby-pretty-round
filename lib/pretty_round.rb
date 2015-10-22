@@ -80,32 +80,32 @@ class Numeric
   
   # Ceiling with given significant digit.
   def sceil(digit)
-    numdigit = Math.log10(abs).floor + 1
-    mceil(10**(numdigit - digit))
+    selfdigit = Math.log10(abs).floor + 1
+    mceil(10**(selfdigit - digit))
   end
   
   # Flooring with given significant digit.
   def sfloor(digit)
-    numdigit = Math.log10(abs).floor + 1
-    mfloor(10**(numdigit - digit))
+    selfdigit = Math.log10(abs).floor + 1
+    mfloor(10**(selfdigit - digit))
   end
   
   # Rounding up with given significant digit.
   def sroundup(digit)
-    numdigit = Math.log10(abs).floor + 1
-    mroundup(10**(numdigit - digit))
+    selfdigit = Math.log10(abs).floor + 1
+    mroundup(10**(selfdigit - digit))
   end
   
   # Rounding down with given significant digit.
   def srounddown(digit)
-    numdigit = Math.log10(abs).floor + 1
-    mrounddown(10**(numdigit - digit))
+    selfdigit = Math.log10(abs).floor + 1
+    mrounddown(10**(selfdigit - digit))
   end
   
   # Rounding off with given significant digit.
   def sround(digit)
-    numdigit = Math.log10(abs).floor + 1
-    mround(10**(numdigit - digit))
+    selfdigit = Math.log10(abs).floor + 1
+    mround(10**(selfdigit - digit))
   end
   
   alias :struncate :srounddown
