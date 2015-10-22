@@ -1,6 +1,6 @@
 ruby-pretty-round
 ================
-This gem add useful numerical rounding methods to `Numeric` class as shown below...
+This gem add useful numerical rounding methods to `Numeric` class as shown below.
 - round to nearest multiple
 - round with significant digits
 
@@ -16,7 +16,7 @@ require "pretty_round"
 x = 123.456
 
 # round with precision
-x.roundup(2) #=> 123.46
+x.roundup #=> 124
 x.rounddown(2) #=> 123.45
 
 # round to nearest multiple
@@ -36,59 +36,54 @@ x.sround(5) #=> 123.46
 
 Rounding direction
 ================
+- `#*ceil` / `#*floor`: These methods round to the positive / negative infinity direction. Its behavior is same as built-in `#ceil`, `#floor`.
+- `#*roundup` / `#*rounddown`: These methods round to far from / near to 0 direction.
+- `#*round`: These methods round off the absolute value, does not round even. Its behavior is same as built-in `#round`.
+- `#*truncate`: These methods are alias of `#*rounddown`.
+
+Result table is shown below, including ruby built-in rounding methods for comparison.
+An axis of abscissas refers to the receiver and an axis of ordinates refers to the methods.
+```
+              |  1.9  1.1 -1.1 -1.9
+-----------------------------------
+.ceil         |    2    2   -1   -1 (ruby built-in)
+.floor        |    1    1   -2   -2 (ruby built-in)
+.roundup      |    2    2   -2   -2
+.rounddown    |    1    1   -1   -1
+.round        |    2    1   -1   -2 (ruby built-in)
+.truncate     |    1    1   -1   -1 (ruby built-in)
+.mceil(1)     |    2    2   -1   -1
+.mfloor(1)    |    1    1   -2   -2
+.mroundup(1)  |    2    2   -2   -2
+.mrounddown(1)|    1    1   -1   -1
+.mround(1)    |    2    1   -1   -2
+.mtruncate(1) |    1    1   -1   -1
+.sceil(1)     |    2    2   -1   -1
+.sfloor(1)    |    1    1   -2   -2
+.sroundup(1)  |    2    2   -2   -2
+.srounddown(1)|    1    1   -1   -1
+.sround(1)    |    2    1   -1   -2
+.struncate(1) |    1    1   -1   -1
+```
+
 Also, try to run `examples/example.rb`
 
-`#mceil`, `#sceil`
+
+Known Bugs
+================
+Float presision
 ----------------
-These methods round up to the positive infinity direction.
-Its behavior is same as built-in #ceil.
 ```rb
- 1.9.mceil(1) #=> 2
- 1.1.mceil(1) #=> 2
--1.1.mceil(1) #=> -1
--1.9.mceil(1) #=> -1
+1.2.mrounddown(0.1) #=> 1.1
+```
+Oops... Resulting 1.2 is expected.
+
+Becouse, 
+```rb
+1.2.divmod(0.1) #=> [11, 0.0999999999999999]
 ```
 
-`#mfloor`, `#sfloor`
-----------------
-These methods round down to the negative infinity direction.
-Its behavior is same as built-in #floor.
+To avoid this bug, please use `Rational`.
 ```rb
- 1.9.mfloor(1) #=> 1
- 1.1.mfloor(1) #=> 1
--1.1.mfloor(1) #=> -2
--1.9.mfloor(1) #=> -2
+1.2r.mrounddown(0.1r) #=> (6/5)
 ```
-
-`#roundup`, `#mroundup`, `#sroundup`
-----------------
-These methods round up to far from 0 direction.
-```rb
- 1.9.mroundup(1) #=> 2
- 1.1.mroundup(1) #=> 2
--1.1.mroundup(1) #=> -2
--1.9.mroundup(1) #=> -2
-```
-
-`#rounddown`, `#mrounddown`, `#srounddown`
-----------------
-These methods round down to near from 0 direction.
-```rb
- 1.9.mrounddown(1) #=> 1
- 1.1.mrounddown(1) #=> 1
--1.1.mrounddown(1) #=> -1
--1.9.mrounddown(1) #=> -1
-```
-
-
-`#mround`, `#sround`
-----------------
-These methods round off the absolute value, dos not round even.
-Its behavior is same as built-in #round.
-```rb
- 1.9.mround(1) #=> 2
- 1.1.mround(1) #=> 1
--1.1.mround(1) #=> -1
--1.9.mround(1) #=> -2
-```
-
