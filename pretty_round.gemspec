@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "pretty_round"
-  s.version = "0.1.2"
+  s.version = "0.1.3"
   
   s.summary = "pretty rounding methods library"
   s.author = "diaphragm"
