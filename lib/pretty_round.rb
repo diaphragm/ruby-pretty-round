@@ -21,8 +21,8 @@ class Numeric
       quo(x).ceil * x
     end
   end
-  
-  
+
+
   # Return nearest multiple of given number that is equal to or greater than self.
   # This method round up to the positive infinity direction.
   def mceil(num)
@@ -32,7 +32,7 @@ class Numeric
       [x, x+num].max
     end
   end
-  
+
   # Return nearest multiple of given number that is equal to or less than self.
   # This method round down to the negative infinity direction.
   def mfloor(num)
@@ -42,7 +42,7 @@ class Numeric
       [x, x+num].min
     end
   end
-  
+
   # Return nearest multiple of given number that the absolute is equal to or greater than self.
   # This method round up to far from 0 direction.
   def mroundup(num)
@@ -52,7 +52,7 @@ class Numeric
       [x, x+num].max_by(&:abs)
     end
   end
-  
+
   # Return nearest multiple of given number that the absolute is equal to or less than self.
   # This method round down to near to 0 direction.
   def mrounddown(num)
@@ -62,7 +62,7 @@ class Numeric
       [x, x+num].min_by(&:abs)
     end
   end
-  
+
   # Retuen nearest multiple of given number.
   # When self is median of multiple of given number, return the multiple that have greater absolute.
   def mround(num)
@@ -74,39 +74,44 @@ class Numeric
       [x, x+num].min_by{|t| (t - self).abs}
     end
   end
-  
+
   alias :mtruncate :mrounddown
-  
-  
+
+
   # Ceiling with given significant digit.
   def sceil(digit)
+    return self if zero?
     selfdigit = Math.log10(abs).floor + 1
     mceil(10**(selfdigit - digit))
   end
-  
+
   # Flooring with given significant digit.
   def sfloor(digit)
+    return self if zero?
     selfdigit = Math.log10(abs).floor + 1
     mfloor(10**(selfdigit - digit))
   end
-  
+
   # Rounding up with given significant digit.
   def sroundup(digit)
+    return self if zero?
     selfdigit = Math.log10(abs).floor + 1
     mroundup(10**(selfdigit - digit))
   end
-  
+
   # Rounding down with given significant digit.
   def srounddown(digit)
+    return self if zero?
     selfdigit = Math.log10(abs).floor + 1
     mrounddown(10**(selfdigit - digit))
   end
-  
+
   # Rounding off with given significant digit.
   def sround(digit)
+    return self if zero?
     selfdigit = Math.log10(abs).floor + 1
     mround(10**(selfdigit - digit))
   end
-  
+
   alias :struncate :srounddown
 end
