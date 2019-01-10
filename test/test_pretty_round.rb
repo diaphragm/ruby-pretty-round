@@ -1,5 +1,7 @@
 require 'minitest'
-require 'pretty_round'
+# require_relative '../lib/pretty_round'
+require_relative '../lib/pretty_round/core'
+using PrettyRound
 
 Minitest.autorun
 
