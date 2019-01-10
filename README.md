@@ -34,6 +34,15 @@ x.srounddown(4) #=> 123.4
 x.sround(5) #=> 123.46
 ```
 
+Refinements
+----------------
+When `require 'pretty_round'`, rounding methods are included in **global scope**.
+To include in limited scope, please load `pretty_round/core` and use refinements.
+```rb
+require 'pretty_round/core'
+useing PrettyRound
+```
+
 Rounding direction
 ================
 - `#*ceil` / `#*floor`: These methods round to the positive / negative infinity direction. Its behavior is same as built-in `#ceil`, `#floor`.
@@ -78,7 +87,7 @@ Float presision
 ```
 Oops... Resulting 1.2 is expected.
 
-Becouse, 
+Becouse,
 ```rb
 1.2.divmod(0.1) #=> [11, 0.0999999999999999]
 ```
