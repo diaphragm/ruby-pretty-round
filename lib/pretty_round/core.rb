@@ -58,7 +58,7 @@ module PrettyRound
   def mround(num)
     if (x = num * div(num)) == self
       self
-    elsif x + x +num == self + self # if self is median
+    elsif x + x+num == self + self # if self is median
       [x, x+num].max_by(&:abs)
     else
       [x, x+num].min_by{|t| (t - self).abs}
