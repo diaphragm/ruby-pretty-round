@@ -40,7 +40,7 @@ When `require 'pretty_round'`, rounding methods are included in **global scope**
 To include in limited scope, please load `pretty_round/core` and use refinements.
 ```rb
 require 'pretty_round/core'
-useing PrettyRound
+using PrettyRound
 ```
 
 Rounding direction
